@@ -1,6 +1,6 @@
-import { join } from 'path'
+const path = require('path');
 
-const toPath = (path) => join(process.cwd(), path)
+const toPath = (_path) => path.join(process.cwd(), _path);
 
 module.exports = {
   webpackFinal: async (config) => {
