@@ -5,7 +5,7 @@ import RoundedButton from "./RoundedButton";
 
 export default {
   title: "inputs/RoundedButton",
-  componente: RoundedButton,
+  component: RoundedButton,
 } as ComponentMeta<typeof RoundedButton>;
 
 const Template: ComponentStory<typeof RoundedButton> = (args) => (
