@@ -58,7 +58,7 @@ export const AppList = styled("ul")`
   }
 `;
 
-export const SocialButton = styled((props: LinkProps<React.ElementType>) => (
+export const SocialButton = styled((props: LinkProps<typeof IconButton>) => (
   <Link
     component={IconButton}
     target={"_blank"}
