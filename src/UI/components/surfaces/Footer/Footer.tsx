@@ -5,6 +5,10 @@ import {
   FooterGrid,
   FooterTitle,
   FooterListItem,
+  SocialContainer,
+  AppList,
+  FooterSocialList,
+  SocialButton,
 } from "./Footer.style";
 const Footer = () => {
   return (
@@ -51,7 +55,51 @@ const Footer = () => {
             satisfeitos por todo o país.
           </Typography>
         </Box>
-        <FooterTitle>Baixe nossos aplicativos</FooterTitle>
+        <SocialContainer>
+          <div>
+            <FooterTitle>Baixe nossos aplicativos</FooterTitle>
+            <AppList>
+              <li>
+                <a
+                  href="https://apps.apple.com/br/app/treinaweb/id1322729447"
+                  target={"_blank"}
+                  rel={"noopener noreferrer"}
+                >
+                  <img src={"/img/logos/app-store.png"} alt={"AppStore"} />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://play.google.com/store/apps/details?id=br.com.treinaweb.mobile"
+                  target={"_blank"}
+                  rel={"noopener noreferrer"}
+                >
+                  <img src={"/img/logos/google-play.png"} alt={"Google Play"} />
+                </a>
+              </li>
+            </AppList>
+          </div>
+          <div>
+            <FooterTitle>Redes Sociais</FooterTitle>
+            <FooterSocialList>
+              <FooterListItem>
+                <SocialButton href="/">
+                  <i className="twf-facebook-f" />
+                </SocialButton>
+              </FooterListItem>
+              <FooterListItem>
+                <SocialButton href="/">
+                  <i className="twf-instagram" />
+                </SocialButton>
+              </FooterListItem>
+              <FooterListItem>
+                <SocialButton href="/">
+                  <i className="twf-youtube" />
+                </SocialButton>
+              </FooterListItem>
+            </FooterSocialList>
+          </div>
+        </SocialContainer>
       </FooterGrid>
     </FooterContainer>
   );
