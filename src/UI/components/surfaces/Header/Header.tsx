@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import Link from "UI/components/navigation/Link/Link";
 import {
-  HeaderAppaBar,
+  HeaderAppBar,
   HeaderLogo,
   ButtonsContainer,
   HeaderDrawer,
@@ -26,7 +26,7 @@ export default Header;
 
 const HeaderDesktop: React.FC = () => {
   return (
-    <HeaderAppaBar>
+    <HeaderAppBar>
       <Toolbar component={Container}>
         <Link href="/">
           <HeaderLogo src="/img/logos/logo.svg" alt="e-diarista" />
@@ -47,14 +47,14 @@ const HeaderDesktop: React.FC = () => {
           </Link>
         </ButtonsContainer>
       </Toolbar>
-    </HeaderAppaBar>
+    </HeaderAppBar>
   );
 };
 
 const HeaderMobile: React.FC = () => {
   const [isDraweroPen, setDrawerOpen] = useState(false);
   return (
-    <HeaderAppaBar>
+    <HeaderAppBar>
       <Toolbar component={Container}>
         <IconButton
           edge={"start"}
@@ -82,6 +82,6 @@ const HeaderMobile: React.FC = () => {
           </MenuList>
         </HeaderDrawer>
       </Toolbar>
-    </HeaderAppaBar>
+    </HeaderAppBar>
   );
 };
