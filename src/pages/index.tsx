@@ -1,3 +1,4 @@
+import Advantages from "@patials/index/_advantages";
 import Presentation from "@patials/index/_presentation";
 import type { GetStaticProps, NextPage } from "next";
 
@@ -13,6 +14,7 @@ const Index: NextPage<{ title: string }> = (props) => {
   return (
     <div>
       <Presentation />
+      <Advantages />
     </div>
   );
 };
