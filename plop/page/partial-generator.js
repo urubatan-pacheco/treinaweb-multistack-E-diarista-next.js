@@ -1,4 +1,4 @@
-module.exports = function (plop, handlers) {
+module.exports = (plop, handlers) => {
     plop.setGenerator('partial', {
         description: 'Partial',
         prompts: [

@@ -7,10 +7,9 @@ module.exports = (plop) => {
         plop.setHelper(functionName, handlers[functionName]);
     });
 
+    componentGenerator(plop)
     pageGenerator(plop, handlers);
     partialGenerator(plop, handlers);
-    componentGenerator(plop)
-
 }
 
 const handlers = {

@@ -1,4 +1,4 @@
-module.exports = function (plop, handlers) {
+module.exports = (plop, handlers) => {
     plop.setGenerator('page', {
         description: 'Página',
         prompts: [
@@ -33,5 +33,5 @@ module.exports = function (plop, handlers) {
 
             return actions;
         },
-    });
-};
+    })
+}
