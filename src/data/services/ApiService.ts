@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:8000";
+const baseUrl = "https://ediaristas-api-php.herokuapp.com";
 
 export const ApiService = axios.create({
   baseURL: baseUrl,
