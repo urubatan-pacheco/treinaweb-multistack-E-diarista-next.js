@@ -26,7 +26,7 @@ export const ToggleButtonStyled = styled(ToggleButton)`
       }
     }
 
-    .MuiToggleButton-label {
+    &.MuiToggleButton-root {
       display: grid;
 
       ${({ theme }) => theme.breakpoints.up("md")} {
