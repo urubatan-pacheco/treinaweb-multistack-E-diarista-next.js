@@ -19,18 +19,33 @@ export const NewContactData = styled(BaseGrid)`
   grid-template-areas:
     "email email"
     "senha password-strength"
-    "confirmar_senha password-strength";
+    "confirmar-senha password-strength";
 
   ${({ theme }) => theme.breakpoints.down("md")} {
     grid-template-areas:
       "email"
       "senha"
       "password-strength"
-      "confirmar senha";
+      "confirmar-senha";
   }
 `;
 
 export const PictureSelection = styled(BaseGrid)`
   grid-template-columns: 1fr;
   padding: 0;
+`;
+
+export const UserData = styled(BaseGrid)`
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas:
+    "nome nome nome"
+    "data-nasciment cpf telefone";
+
+  ${({ theme }) => theme.breakpoints.down("md")} {
+    grid-template-areas:
+      "nome"
+      "data-nasciment"
+      "cpf"
+      "telefone";
+  }
 `;
