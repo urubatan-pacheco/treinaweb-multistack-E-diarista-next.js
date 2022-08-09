@@ -20,6 +20,7 @@ export default function useAddressForm() {
     estados = LocationService.estados(),
     listaCidades = useCities(addressState),
     opcoesCidades = useMemo(
+      
       () => listaCidades.map((item) => item.cidade),
       [listaCidades]
     );
