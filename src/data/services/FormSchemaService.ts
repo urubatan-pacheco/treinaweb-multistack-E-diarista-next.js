@@ -56,7 +56,7 @@ export const FormSchemaService = {
               }).card_number
           ),
           nome_cartao: yup.string(),
-          validate: yup.string().test(
+          validade: yup.string().test(
             "card_expiration_date",
             "Data de validade inválida",
             (value) =>
