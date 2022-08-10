@@ -1,11 +1,11 @@
 export const ValidationService = {
-  cep(cep = ''): boolean {
+  cep(cep = ""): boolean {
     return cep.replace(/\D/g, "").length === 8;
   },
   telefone(telefone = ""): boolean {
     return telefone.replace(/\D/g, "").length === 11;
   },
-  cpf(cpf ='') {
+  cpf(cpf = "") {
     cpf = cpf.replace(/[^\d]+/g, "");
     if (cpf == "") return false;
     // Elimina CPFs invalidos conhecidos
@@ -36,5 +36,16 @@ export const ValidationService = {
     if (rev == 10 || rev == 11) rev = 0;
     if (rev != parseInt(cpf.charAt(10))) return false;
     return true;
+  },
+  horarioDeAgendamento(data: string, hora: string): boolean {
+    const agora = Date.now(),
+      dataHora = new Date(data + "T" + hora).getTime(),
+      diferenca = (dataHora - agora) / 1000 / 60 / 60,
+      minHora = 48;
+
+    return diferenca > minHora;
+  },
+  hora(horario = ""): boolean {
+    return /^([01][0-9]|2[0-3]):([0-5][0-9])$/.test(horario);
   },
 };
