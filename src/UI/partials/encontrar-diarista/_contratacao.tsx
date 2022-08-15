@@ -1,4 +1,4 @@
-import { Button, Paper } from "@mui/material";
+import { Button, Paper, Typography } from "@mui/material";
 import { spawn } from "child_process";
 import useContratacao from "data/hooks/pages/useContratacao.page";
 import useIsMobile from "data/hooks/useIsMobile";
@@ -29,6 +29,9 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
     cleintForm,
     onClientFormSubmit,
     setStep,
+    loginForm,
+    onLoginFormSubmit,
+    loginError,
   } = useContratacao();
   const isMobile = useIsMobile();
   return (
@@ -81,8 +84,14 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
             </FormProvider>
 
             {step === 2 && hasLogin && (
-              <FormProvider {...cleintForm}>
-                <form onSubmit={cleintForm.handleSubmit(onClientFormSubmit)}>
+              <FormProvider {...loginForm}>
+                <form onSubmit={loginForm.handleSubmit(onLoginFormSubmit)}>
+                  {loginError && (
+                    <Typography color={"error"} align={"center"} sx={{ mb: 2 }}>
+                      {loginError}
+                    </Typography>
+                  )}
+
                   <LoginCliente onBack={() => setStep(1)} />
                 </form>
               </FormProvider>
