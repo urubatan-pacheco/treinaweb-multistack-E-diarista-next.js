@@ -40,12 +40,12 @@ export const UserData = styled(BaseGrid)`
   grid-template-columns: repeat(3, 1fr);
   grid-template-areas:
     "nome nome nome"
-    "data-nasciment cpf telefone";
+    "data-nascimento cpf telefone";
 
   ${({ theme }) => theme.breakpoints.down("md")} {
     grid-template-areas:
       "nome"
-      "data-nasciment"
+      "data-nascimento"
       "cpf"
       "telefone";
   }
