@@ -12,7 +12,7 @@ import {
   PageFormContainer,
 } from "UI/components/inputs/UserForm/UserForm";
 import BreadCrumb from "UI/components/navigation/BreadCrumb/BreadCrumb";
-import CadastroCliente from "./_cadastro-cliente";
+import CadastroCliente, { LoginCliente } from "./_cadastro-cliente";
 import DetalheServico from "./_detalhe-servico";
 
 // import { Component } from './_contratacao.styled';
@@ -79,6 +79,14 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
                 <CadastroCliente onBack={() => setStep(1)} />
               </form>
             </FormProvider>
+
+            {step === 2 && hasLogin && (
+              <FormProvider {...cleintForm}>
+                <form onSubmit={cleintForm.handleSubmit(onClientFormSubmit)}>
+                  <LoginCliente onBack={() => setStep(1)} />
+                </form>
+              </FormProvider>
+            )}
           </Paper>
           {!isMobile && step !== 4 && (
             <SideInformation
