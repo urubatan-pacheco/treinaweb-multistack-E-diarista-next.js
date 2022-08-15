@@ -70,6 +70,93 @@ const DetalheServico: React.FC<DetalheServicoProps> = ({ servicos = [] }) => {
       />
 
       <Divider sx={{ my: 5 }} />
+      <Typography sx={{ fontWeight: "bold", mb: 2 }}>
+        Qual o tamanho da sua casa?
+      </Typography>
+
+      <ItemsContainer>
+        {houseParts.map((item) => (
+          <Controller
+            key={item.name}
+            name={`faxina.${item.name}` as any}
+            defaultValue={0}
+            control={control}
+            render={({ field }) => (
+              <ItemCounter
+                label={item.singular}
+                plural={item.plural}
+                counter={field.value as number}
+                onInc={() => field.onChange((field.value as number) + 1)}
+                onDec={() =>
+                  field.onChange(Math.max(0, (field.value as number) - 1))
+                }
+              />
+            )}
+          />
+        ))}
+      </ItemsContainer>
+      <Divider sx={{ my: 5 }} />
+
+      <Typography sx={{ fontWeight: "bold", mb: 2 }}>
+        Qual a data você gostaria de receber a/o diarista?
+      </Typography>
+
+      <ItemsContainer>
+        <Controller
+          name={"faxina.data_atendimento"}
+          defaultValue={""}
+          control={control}
+          render={({ field: { ref, ...inputProps } }) => (
+            <TextFieldMask
+              {...inputProps}
+              inputRef={ref}
+              mask={"99/99/9999"}
+              label={"Data"}
+              error={errors?.faxina?.data_atendimento !== undefined}
+              helperText={errors?.faxina?.data_atendimento?.message}
+            />
+          )}
+        />
+
+        <Controller
+          name={"faxina.hora_inicio"}
+          defaultValue={""}
+          control={control}
+          render={({ field: { ref, ...inputProps } }) => (
+            <TextFieldMask
+              {...inputProps}
+              inputRef={ref}
+              mask={"99:99"}
+              label={"Hora Início"}
+              error={errors?.faxina?.hora_inicio !== undefined}
+              helperText={errors?.faxina?.hora_inicio?.message}
+            />
+          )}
+        />
+
+        <Controller
+          name={"faxina.hora_termino"}
+          defaultValue={""}
+          control={control}
+          render={({ field: { ref, ...inputProps } }) => (
+            <Tooltip title={"Campo Automático"}>
+              <div>
+                <TextFieldMask
+                  {...inputProps}
+                  inputProps={{ readOnly: true, disable: true }}
+                  inputRef={ref}
+                  mask={"99:99"}
+                  label={"Hora Término"}
+                  error={errors?.faxina?.hora_termino !== undefined}
+                  helperText={errors?.faxina?.hora_termino?.message}
+                />
+              </div>
+            </Tooltip>
+          )}
+        />
+      </ItemsContainer>
+
+      <Divider sx={{ my: 5 }} />
       <AddressForm />
     </div>
   );
