@@ -1,4 +1,5 @@
-import { Paper } from "@mui/material";
+import { Button, Paper } from "@mui/material";
+import { spawn } from "child_process";
 import useContratacao from "data/hooks/pages/useContratacao.page";
 import useIsMobile from "data/hooks/useIsMobile";
 import React, { PropsWithChildren } from "react";
@@ -16,8 +17,17 @@ import DetalheServico from "./_detalhe-servico";
 // import { Component } from './_contratacao.styled';
 
 const Contratacao: React.FC<PropsWithChildren> = () => {
-  const { step, breadcrumbItems, serviceForm, onServiceFormSubmit, servicos } =
-    useContratacao();
+  const {
+    step,
+    breadcrumbItems,
+    serviceForm,
+    onServiceFormSubmit,
+    servicos,
+    hasLogin,
+    setHasLogin,
+    cleintForm,
+    onClientFormSubmit,
+  } = useContratacao();
   const isMobile = useIsMobile();
   return (
     <div>
@@ -27,6 +37,26 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
         items={breadcrumbItems}
       />
       {step === 1 && <PageTitle title="Nos conte um pouco sobre o serviço!" />}
+
+      {step === 2 && (
+        <PageTitle
+          title="Precisamos conhecer um pouco sobre você!"
+          subtitle={
+            !hasLogin ? (
+              <span>
+                Caso já tenha cadastro,{" "}
+                <Button onClick={() => setHasLogin(true)}>clique aqui</Button>
+              </span>
+            ) : (
+              <span>
+                Caso não tenha cadastro,{" "}
+                <Button onClick={() => setHasLogin(false)}>clique aqui</Button>
+              </span>
+            )
+          }
+        />
+      )}
+
       <UserFormContainer>
         <PageFormContainer>
           <Paper>
@@ -36,6 +66,15 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
                 hidden={step !== 1}
               >
                 <DetalheServico servicos={servicos} />
+              </form>
+            </FormProvider>
+
+            <FormProvider {...cleintForm}>
+              <form
+                onSubmit={cleintForm.handleSubmit(onClientFormSubmit)}
+                hidden={step !== 2 || hasLogin}
+              >
+                Client form
               </form>
             </FormProvider>
           </Paper>
