@@ -1,4 +1,4 @@
-import { Button, Paper, Typography } from "@mui/material";
+import { Box, Button, Paper, Typography } from "@mui/material";
 import { spawn } from "child_process";
 import useContratacao from "data/hooks/pages/useContratacao.page";
 import useIsMobile from "data/hooks/useIsMobile";
@@ -12,6 +12,7 @@ import {
   PageFormContainer,
 } from "UI/components/inputs/UserForm/UserForm";
 import BreadCrumb from "UI/components/navigation/BreadCrumb/BreadCrumb";
+import Link from "UI/components/navigation/Link/Link";
 import CadastroCliente, { LoginCliente } from "./_cadastro-cliente";
 import DetalheServico from "./_detalhe-servico";
 import InformacoesPagamento from "./_informacoes-pagamento";
@@ -65,8 +66,17 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
         />
       )}
 
+      {step === 3 && (
+        <PageTitle
+          title="Informe os dados do cartão para pagamento"
+          subtitle={
+            "Será feita uma reserva, mas o valor só será descontado quando você confirmar a presença do/da diarista"
+          }
+        />
+      )}
+
       <UserFormContainer>
-        <PageFormContainer>
+        <PageFormContainer fullWidth={step === 4}>
           <Paper>
             <FormProvider {...serviceForm}>
               <form
@@ -108,7 +118,40 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
               </FormProvider>
             )}
 
-            
+            {step === 4 && (
+              <Box sx={{ textAlign: "center" }}>
+                <Typography sx={{ fontSize: "82px" }} color={"secondary"}>
+                  <i className="twf-check-circle" />
+                </Typography>
+
+                <Typography
+                  sx={{ fontSize: "22px", pb: 3 }}
+                  color={"secondary"}
+                >
+                  Pagamento realizado com sucesso!
+                </Typography>
+
+                <Typography
+                  sx={{ mb: 3, maxWidth: "410px", mx: "auto" }}
+                  color={"textSecondary"}
+                >
+                  Sua diária foi paga com sucesso! Já estamos procurando o(a)
+                  melhor profissional para atender sua residência. Caso
+                  nenhum(a) profissional seja encontrado(a), devolvemos seu
+                  dinheiro automaticamente 24 horas antes da data agendada. Você
+                  também pode cancelar a sua diária sem nenhuma multa até 24
+                  horas antes da hora do agendamento.
+                </Typography>
+
+                <Link
+                  href="/diarias"
+                  Component={Button}
+                  mui={{ color: "secondary", variant: "contained" }}
+                >
+                  Ir para minhas diárias
+                </Link>
+              </Box>
+            )}
           </Paper>
           {!isMobile && step !== 4 && (
             <SideInformation
