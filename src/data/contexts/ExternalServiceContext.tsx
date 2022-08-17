@@ -1,17 +1,26 @@
+import {
+  ExternalServiceReducerInterface,
+  initialState,
+  useExternalServicesReducer,
+} from "data/reduces/ExternalServiceReducer";
 import { createContext } from "react";
+import React, { PropsWithChildren } from "react";
 
-export const ExternalServiceContext = createContext({});
+const initialValue: ExternalServiceReducerInterface = {
+  externalServicesDispatch: () => {},
+  externalServicesState: initialState,
+};
 
-export const ExternalServiceProvider = () => {
-  let a = 5;
+export const ExternalServiceContext = createContext(initialValue);
 
-  function setA() {
-    a = 5;
-  }
+export const ExternalServiceProvider: React.FC<PropsWithChildren> = ({
+  children,
+}) => {
+  const provider = useExternalServicesReducer();
 
   return (
-    <ExternalServiceContext.Provider value={{ value: a, funcao: setA }}>
-      {/* <MeuComponente /> */}
+    <ExternalServiceContext.Provider value={provider}>
+      {children}
     </ExternalServiceContext.Provider>
   );
 };
