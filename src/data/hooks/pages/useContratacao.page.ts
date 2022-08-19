@@ -5,7 +5,7 @@ import {
   NovaDiariaFormDataInterface,
   PagamentoFormDataInterface,
 } from "data/@types/FormInterface";
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormSchemaService } from "data/services/FormSchemaService";
@@ -15,6 +15,8 @@ import { DiariaInterface } from "data/@types/DiariaInterface";
 import { ValidationService } from "data/services/ValidationService";
 import { DateService } from "data/services/DateService";
 import { houseParts } from "@patials/encontrar-diarista/_detalhe-servico";
+import { ExternalServiceContext } from "data/contexts/ExternalServiceContext";
+import { ApiService, linksResolver } from "data/services/ApiService";
 
 export default function useContratacao() {
   const [step, setStep] = useState(1),
@@ -67,7 +69,33 @@ export default function useContratacao() {
       dadosFaxina?.quantidade_quartos,
       dadosFaxina?.quantidade_quintais,
       dadosFaxina?.quantidade_salas,
-    ]);
+    ]),
+    cepFaxina = serviceForm.watch("endereco.cep"),
+    [podemosAtender, setPodemosAtender] = useState(false),
+    { externalServicesState } = useContext(ExternalServiceContext);
+
+  useEffect(() => {
+    // verificar_disponibilidade_atendimento
+    const cep = (cepFaxina ?? "").replace(/\D/g, "");
+    if (ValidationService.cep(cep)) {
+      const linkDisponibilidade = linksResolver(
+        externalServicesState.externalService,
+        "verificar_disponibilidade_atendimento"
+      );
+
+      if (linkDisponibilidade) {
+        ApiService.request({
+          url: linkDisponibilidade.uri,
+          method: linkDisponibilidade.type,
+          params: { cep },
+        })
+          .then((response) => setPodemosAtender(true))
+          .catch((_erro) => setPodemosAtender(false));
+      }
+    } else {
+      setPodemosAtender(false);
+    }
+  }, [cepFaxina, externalServicesState.externalService]);
 
   useEffect(() => {
     if (
@@ -190,5 +218,6 @@ export default function useContratacao() {
     tamanhoCasa,
     tipoLimpeza,
     totalPrice,
+    podemosAtender,
   };
 }
