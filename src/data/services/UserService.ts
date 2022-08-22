@@ -48,13 +48,13 @@ export const UserService = {
       if (errorList) {
         if (errorList.cpf) {
           form.setError("usuario.cpf", {
-            type: "cadastrodo",
+            type: "cadastrado",
             message: "CPF já cadastrado",
           });
         }
         if (errorList.email) {
           form.setError("usuario.email", {
-            type: "cadastrodo",
+            type: "cadastrado",
             message: "E-mail já cadastrado",
           });
         }
