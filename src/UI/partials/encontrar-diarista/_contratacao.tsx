@@ -9,8 +9,9 @@ import { Container } from "@mui/system";
 import { spawn } from "child_process";
 import useContratacao from "data/hooks/pages/useContratacao.page";
 import useIsMobile from "data/hooks/useIsMobile";
+import { BrawserService } from "data/services/BrawserService";
 import { TextFormatService } from "data/services/TextFormatService";
-import React, { PropsWithChildren } from "react";
+import React, { PropsWithChildren, useEffect } from "react";
 import { FormProvider } from "react-hook-form";
 import DataList from "UI/components/data-display/DataList/DataList";
 import PageTitle from "UI/components/data-display/PageTitle/PageTitle";
@@ -52,6 +53,10 @@ const Contratacao: React.FC<PropsWithChildren> = () => {
   } = useContratacao();
   const isMobile = useIsMobile(),
     dataAtendimento = serviceForm.watch("faxina.data_atendimento");
+
+  useEffect(() => {
+    BrawserService.scrollToTop();
+  }, [step]);
 
   if (!servicos || servicos.length < 1) {
     return (

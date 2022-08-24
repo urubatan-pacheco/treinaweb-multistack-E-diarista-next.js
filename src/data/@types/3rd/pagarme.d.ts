@@ -27,6 +27,6 @@ interface PagarmeInterface {
 interface PagarmeClientInterface {
   connect: ({ encryption_key: string }) => Promise<PagarmeClientInterface>;
   security: {
-    encrypt: (card: CardInterface) => Prmise<string>;
+    encrypt: (card: CardInterface) => Promise<string>;
   };
 }
