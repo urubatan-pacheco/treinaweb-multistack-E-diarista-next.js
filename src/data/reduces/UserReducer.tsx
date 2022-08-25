@@ -5,6 +5,7 @@ import {
 } from "data/@types/EnderecoInterface";
 import { UserInterface, UserType } from "data/@types/UserInterface";
 import { ApiService } from "data/services/ApiService";
+import { LoginService } from "data/services/LoginService";
 import produce from "immer";
 import React, { useReducer, useEffect } from "react";
 
@@ -77,6 +78,23 @@ export interface UserReducerInterface {
 
 export function useUserReducer(): UserReducerInterface {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  useEffect(() => {
+    getUser();
+  }, [state.user.id]);
+
+  async function getUser() {
+    try {
+      dispatch({ type: "SET_LOGGING", payload: true });
+      const user = await LoginService.getUser();
+      if (user) {
+        dispatch({ type: "SET_USER", payload: user });
+      }
+    } catch (error) {
+    } finally {
+      dispatch({ type: "SET_LOGGING", payload: false });
+    }
+  }
 
   return {
     userState: state,
