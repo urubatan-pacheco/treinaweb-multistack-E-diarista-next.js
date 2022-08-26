@@ -82,7 +82,7 @@ const HeaderDesktop: React.FC<HeaderProps> = (props) => {
             onClick={() => setIsMenuOpen(true)}
             onMenuClick={() => setIsMenuOpen(false)}
             onMenuClose={() => setIsMenuOpen(false)}
-            onLogout={() => {}}
+            onLogout={props.onLogout}
           />
         ) : (
           <ButtonsContainer>
