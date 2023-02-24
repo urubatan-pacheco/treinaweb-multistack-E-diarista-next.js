@@ -1,8 +1,11 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Baseado no Projeto desenvolvido durante a imersão Multi Stack da TreinaWeb utilizando Java e Spring Boot. Obtido com o git clone -b "semana-15" git@github.com:treinaweb/treinaweb-multistack-E-diarista-next.js.git   Para demonstrar os problemas de integração com o front-end.
 
-## Getting Started
+## Inciando
+Primeiro clone, configure e inicie o backend em https://github.com/urubatan-pacheco/multistack-ediaristas-java (branch main para a situação atual do código da treinaweb na semana 15, branch sugestoes para as minha visão da solução dos problemas de integração backend/frontend)
+Segundo, configure e rode o development server:
 
-First, run the development server:
+Crie o arquivo .env.local, neste exemplo estou considerando backend e frontend rodando no localhost:
+NEXT_PUBLIC_API = "http://127.0.0.1:8080"
 
 ```bash
 npm run dev
